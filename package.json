@@ -36,7 +36,8 @@
     "example": "yarn workspace examples start",
     "prepare": "husky install",
     "precommit": "turbo run precommit",
-    "docs": "yarn workspace docs start"
+    "docs": "yarn workspace docs start",
+    "postinstall": "cd ./node_modules/langchainjs && npm install && npm run build"
   },
   "author": "LangChain",
   "license": "MIT",

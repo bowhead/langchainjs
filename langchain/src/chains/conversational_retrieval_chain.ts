@@ -4,6 +4,7 @@ import { SerializedChatVectorDBQAChain } from "./serde.js";
 import { ChainValues, BaseRetriever } from "../schema/index.js";
 import { BaseChain, ChainInputs } from "./base.js";
 import { LLMChain } from "./llm_chain.js";
+import { OpenAI } from "../llms/openai.js";
 import { loadQAStuffChain } from "./question_answering/load.js";
 import { CallbackManagerForChainRun } from "../callbacks/manager.js";
 
@@ -154,7 +155,7 @@ export class ConversationalRetrievalQAChain
     const qaChain = loadQAStuffChain(llm, { prompt: qa_prompt });
     const questionGeneratorChain = new LLMChain({
       prompt: question_generator_prompt,
-      llm,
+      llm: new OpenAI({ modelName: "gpt-3.5-turbo", temperature:0 }),
     });
     const instance = new this({
       retriever,
